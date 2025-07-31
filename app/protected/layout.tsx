@@ -4,7 +4,7 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
 import Link from "next/link";
 import Image from "next/image";
 
-import logo from "./logo.svg"
+import logo from "../logo.svg"
 export default function ProtectedLayout({
   children,
 }: {

@@ -18,7 +18,7 @@ export default function Home() {
           <div className="w-full max-w-5xl flex justify-between items-center p-3 px-5 text-sm">
             <div className="flex gap-5 items-center font-semibold">
               <Image src={logo} alt="logo" width={50} height={50} className="w-12 h-12"/>
-              <Link href={"/"} className="text-teal-400 text-3xl">Mediaven</Link>
+              <Link href={"/"} className="text-teal-400 text-3xl hidden md:flex">Mediaven</Link>
             </div>
            <AuthButton />
           </div>
