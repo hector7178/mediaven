@@ -66,7 +66,7 @@ export function UpdatePasswordForm({
                 />
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full bg-indigo-700 hover:bg-indigo-900" disabled={isLoading}>
+              <Button type="submit" className="w-full bg-primary  hover:bg-primary " disabled={isLoading}>
                 {isLoading ? "Guardando..." : "Guardar contraseña"}
               </Button>
             </div>

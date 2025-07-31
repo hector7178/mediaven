@@ -51,7 +51,7 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl text-indigo-700">Iniciar sesión</CardTitle>
+          <CardTitle className="text-2xl text-primary ">Iniciar sesión</CardTitle>
           <CardDescription>
             Ingresa a tu cuenta
           </CardDescription>
@@ -89,7 +89,7 @@ export function LoginForm({
                 />
               </div>
               {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full bg-indigo-700 hover:bg-indigo-900" disabled={isLoading}>
+              <Button type="submit" className="w-full bg-primary " disabled={isLoading}>
                 {isLoading ? "Iniciando..." : "Iniciar sesión"}
               </Button>
             </div>
@@ -97,7 +97,7 @@ export function LoginForm({
               No tienes cuenta?{" "}
               <Link
                 href="/auth/sign-up"
-                className="underline underline-offset-4 text-indigo-700"
+                className="underline underline-offset-4 text-primary "
               >
                 Registrate
               </Link>

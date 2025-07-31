@@ -20,7 +20,7 @@ export async function AuthButton() {
   ) : (
     <div className="flex gap-4 flex-row items-center justify-center">
       <Link href="/protected/chat" className="font-bold text-md text-neutral-700">Chat bot</Link>
-      <Button asChild size="sm" variant={"default"} className="bg-indigo-600 hover:bg-indigo-800">
+      <Button asChild size="sm" variant={"default"} className="bg-primary hover:bg-primary ">
         <Link href="/auth/login" className="font-bold text-md ">Iniciar sesión</Link>
       </Button>
       
