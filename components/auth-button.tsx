@@ -14,12 +14,12 @@ export async function AuthButton() {
   return user ? (
     <div className="flex items-center gap-4">
       Hola, {user.email}!
+      <Link href="/chat" className="font-bold text-md text-neutral-700">Chat bot</Link>
       <LogoutButton />
     </div>
   ) : (
     <div className="flex gap-4 flex-row items-center justify-center">
-      <Link href="/store" className="font-bold text-md text-neutral-700">Tienda</Link>
-      <Link href="/chat" className="font-bold text-md text-neutral-700">Chat bot</Link>
+      <Link href="/protected/chat" className="font-bold text-md text-neutral-700">Chat bot</Link>
       <Button asChild size="sm" variant={"default"} className="bg-indigo-600 hover:bg-indigo-800">
         <Link href="/auth/login" className="font-bold text-md ">Iniciar sesión</Link>
       </Button>

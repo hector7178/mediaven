@@ -1,8 +1,7 @@
 
-import { EnvVarWarning } from "@/components/env-var-warning";
+
 import { AuthButton } from "@/components/auth-button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { hasEnvVars } from "@/app/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "./logo.svg"
@@ -21,7 +20,7 @@ export default function Home() {
               <Image src={logo} alt="logo" width={50} height={50} className="w-12 h-12"/>
               <Link href={"/"} className="text-teal-400 text-3xl">Mediaven</Link>
             </div>
-            {!hasEnvVars ? <EnvVarWarning /> : <AuthButton />}
+           <AuthButton />
           </div>
         </nav>
         <section className="w-full h-screen flex flex-col md:flex-row gap-4">
