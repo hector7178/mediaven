@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@/app/lib/supabase/server";
 import { LogoutButton } from "./logout-button";
 
 export async function AuthButton() {
@@ -13,17 +13,17 @@ export async function AuthButton() {
 
   return user ? (
     <div className="flex items-center gap-4">
-      Hey, {user.email}!
+      Hola, {user.email}!
       <LogoutButton />
     </div>
   ) : (
-    <div className="flex gap-2">
-      <Button asChild size="sm" variant={"outline"}>
-        <Link href="/auth/login">Sign in</Link>
+    <div className="flex gap-4 flex-row items-center justify-center">
+      <Link href="/store" className="font-bold text-md text-neutral-700">Tienda</Link>
+      <Link href="/chat" className="font-bold text-md text-neutral-700">Chat bot</Link>
+      <Button asChild size="sm" variant={"default"} className="bg-indigo-600 hover:bg-indigo-800">
+        <Link href="/auth/login" className="font-bold text-md ">Iniciar sesión</Link>
       </Button>
-      <Button asChild size="sm" variant={"default"}>
-        <Link href="/auth/sign-up">Sign up</Link>
-      </Button>
+      
     </div>
   );
 }

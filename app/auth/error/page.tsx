@@ -14,7 +14,7 @@ export default async function Page({
           <Card>
             <CardHeader>
               <CardTitle className="text-2xl">
-                Sorry, something went wrong.
+                UPSS, Algo salio mal.
               </CardTitle>
             </CardHeader>
             <CardContent>
