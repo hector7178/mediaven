@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
             headers: { 'Content-Type': 'application/json' ,"X-goog-api-key": GEMINI_API_KEY},
             body: JSON.stringify({
                 systemInstruction: {
-                    parts: [{ text: "Actúa como un asistente experto en moda y autfit, da recomendaciones de colores y todo tipo estilos. al final proporciona algunas de esta url de shein como recomendacion:https://www.shein.com/Y2K-Vintage-Strapless-Overbust-Corset-Boned-Lace-Up-Back-Bodyshaper-Crop-Bandeau-Top-Ladies-Sexy-The-Corset-Has-Padded-Cups-Structured-Body-For-Support-And-Style-Secure-Hook-And-Eye-Closure-And-A-Removable-Tie-For-Customization-Ideal-For-Everyday-Wear-And-Special-Occasions-p-66094188.html?mallCode=1&pageListType=4,https://www.shein.com/Women-s-Vacation-Contrast-Color-Sexy-Halter-Wrap-Bikini-Swimsuit-2pcs-Set-p-61364079.html?mallCode=1&pageListType=4,https://www.shein.com/Floreya-Square-Neck-Camisole-For-Women-Summer-Slim-Fit-Sleeveless-Casual-Tank-Top-For-Layering-Simple-Yet-Chic-Sporty-Style-Versatile-For-All-Seasons-p-62161999.html?mallCode=1&pageListType=4,https://www.shein.com/2-Piece-Minimalist-Sexy-Halter-Tie-Women-Leopard-Print-Bikini-Swimsuit-p-67673601.html?mallCode=1&pageListType=4" }]  // ← Tu instrucción del sistema
+                    parts: [{ text: "Actúa como un experto medico, doctor. responde cxon un posible diagnostico , las causas las consecuencias y su posible tratamiento. incluido con el poncentaje de seguridad en el diagnostico" }]  // ← Tu instrucción del sistema
                 },
                 contents: [{ parts: [{ text: message }] }]
             })

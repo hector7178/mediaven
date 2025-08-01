@@ -4,22 +4,23 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { createClient } from "../../lib/supabase/client";
+import { redirect } from "next/navigation";
 
 interface Message {
     id: number;
-    sender: "user" | "bot";
+    role: "user" | "bot";
     content: string;
 }
 
 const initialMessages: Message[] = [
     {
         id: 1,
-        sender: "bot",
-        content: "¡Hola! Soy tu BotMedico personal. ¿En qué puedo ayudarte hoy?",
+        role: "bot",
+        content: "¡Hola! Soy tu asistente  de compras. ¿En qué puedo ayudarte hoy?",
     },
 ];
-
-const Chats: React.FC = () => {
+const Chats = ({user}:{user:string|undefined}) => {
     const [messages, setMessages] = useState<Message[]>(initialMessages);
     const [input, setInput] = useState("");
     const [loading, setLoading] = useState(false);
@@ -31,32 +32,44 @@ const Chats: React.FC = () => {
 
     const handleSend = async () => {
         if (!input.trim()) return;
-        const userMessage: Message = {
-            id: Date.now(),
-            sender: "user",
-            content: input,
-        };
-        setMessages((prev) => [...prev, userMessage]);
+        const res= await fetch("/api/chat",{method:"POST",body:JSON.stringify({
+            user_id:user,
+            message:input,
+        })})
+        if(res.status!==200){
+            redirect("/protected/chat/?error=hubo un error")
+        }
         setInput("");
         setLoading(true);
-
-        // Simulate bot response (replace with real API call)
-        setTimeout(() => {
-            const botMessage: Message = {
-                id: Date.now() + 1,
-                sender: "bot",
-                content: `El paciente ha dicho: "${userMessage?.content}"`,
-            };
-            setMessages((prev) => [...prev, botMessage]);
-            setLoading(false);
-        }, 1200);
+        const supabase= createClient()
+        
+        const{ data: message } = await supabase
+        .from('message')
+        .select('*')
+        if(message){
+           setMessages(message) 
+           setLoading(false);
+        }
+    
     };
-
     const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter" && !loading) {
             handleSend();
         }
     };
+    useEffect(()=>{
+        const supa=async()=>{
+        const supabase= createClient()
+        const { data: message} = await supabase
+        .from('message')
+        .select('*')
+        if(message){
+           setMessages(message) 
+        }  
+        }
+        supa();
+       
+    },[])
 
     return (
         <Card className="max-w-xl mx-auto mt-10 flex flex-col h-[80vh] shadow-lg">
@@ -64,15 +77,17 @@ const Chats: React.FC = () => {
                 ChatBot
             </CardHeader>
             <CardContent className="flex-1 p-0 bg-gray-50">
-                <ScrollArea className="h-full px-4 py-6">
-                    {messages.map((msg) => (
+                <ScrollArea className="h-full max-h-[60vh] px-4 py-6">
+                    {messages?.map((msg) =>
+                   {  
+                        return(
                         <div
-                            key={msg?.id}
-                            className={`flex ${msg?.sender === "user" ? "justify-end" : "justify-start"} mb-4`}
+                            key={msg.id}
+                            className={`flex ${msg?.role === "user" ? "justify-end" : "justify-start"} mb-4`}
                         >
                             <div
                                 className={`max-w-[70%] px-4 py-3 rounded-2xl text-base whitespace-pre-wrap shadow-sm
-                                    ${msg?.sender === "user"
+                                    ${msg?.role === "user"
                                         ? "bg-primary text-primary-foreground"
                                         : "bg-muted text-muted-foreground"
                                     }`}
@@ -80,7 +95,7 @@ const Chats: React.FC = () => {
                                 {msg?.content}
                             </div>
                         </div>
-                    ))}
+                    )})}
                     {loading && (
                         <div className="flex items-center mb-4">
                             <div className="bg-muted rounded-2xl px-4 py-3 text-base italic text-muted-foreground">
