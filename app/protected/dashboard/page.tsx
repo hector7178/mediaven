@@ -1,5 +1,4 @@
-// @ts-nocheck
-/* eslint-disable */
+
 
 "use client"
 
@@ -14,7 +13,10 @@ export default  function ProtectedPage() {
   const aiSummary:{
     diagnosis:any[],
     findings:any[],
-    riskPrediction:any,
+    riskPrediction:{
+      label: string,
+      value: number,
+    },
     urgency:urgencyColortype
   } = {
     diagnosis: [
