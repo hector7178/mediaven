@@ -36,16 +36,12 @@ export default function ProtectedLayout({
       </DrawerTitle>
       <DrawerDescription></DrawerDescription>
     </DrawerHeader>
-    <DrawerDescription>
+    <DrawerDescription className="p-6">
       {items?.map((d,i:number)=>{
-        return (<Link href={d?.url} key={i} className="flex flex-row gap-2">{d?.title}</Link>)
+        return (<Link href={d?.url} key={i} className="flex flex-row gap-2 font-bold">{d?.title}</Link>)
       })}
     </DrawerDescription>
     <DrawerFooter>
-      <Button>Submit</Button>
-      <DrawerClose>
-        <Button variant="outline">Cancel</Button>
-      </DrawerClose>
     </DrawerFooter>
   </DrawerContent>
 </Drawer>

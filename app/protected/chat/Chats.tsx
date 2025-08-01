@@ -17,7 +17,7 @@ const initialMessages: Message[] = [
     {
         id: 1,
         role: "bot",
-        content: "¡Hola! Soy tu asistente  de compras. ¿En qué puedo ayudarte hoy?",
+        content: "¡Hola! Soy tu asistente  medico personal. ¿En qué puedo ayudarte hoy?",
     },
 ];
 const Chats = ({user}:{user:string|undefined}) => {
