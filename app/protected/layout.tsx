@@ -28,8 +28,8 @@ export default function ProtectedLayout({
   return (
     <main className="min-h-screen flex flex-col items-center">
       <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5 relative ">
-        <Drawer  direction="left">
-  <DrawerTrigger><MenuIcon className="w-6 h=6"/></DrawerTrigger>
+        <Drawer   direction="left">
+  <DrawerTrigger className="absolute top-10 left-10"><MenuIcon className="w-6 h=6"/></DrawerTrigger>
   <DrawerContent>
     <DrawerHeader>
       <DrawerTitle>
