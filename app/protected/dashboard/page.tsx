@@ -10,7 +10,7 @@ export default  function ProtectedPage() {
   const aiSummary:{
     diagnosis:any[],
     findings:any[],
-    riskPrediction:any[],
+    riskPrediction:any,
     urgency:urgencyColortype
   } = {
     diagnosis: [
