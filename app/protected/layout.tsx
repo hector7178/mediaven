@@ -38,7 +38,7 @@ export default function ProtectedLayout({
     </DrawerHeader>
     <DrawerDescription>
       {items?.map((d,i:number)=>{
-        return (<Link href={d?.url} className="flex flex-row gap-2">{d?.title}</Link>)
+        return (<Link href={d?.url} key={i} className="flex flex-row gap-2">{d?.title}</Link>)
       })}
     </DrawerDescription>
     <DrawerFooter>
