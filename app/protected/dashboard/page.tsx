@@ -8,9 +8,9 @@ export default  function ProtectedPage() {
  
   // Mock data for demonstration
   const aiSummary:{
-    diagnosis:any,
-    findings:any,
-    riskPrediction:any,
+    diagnosis:any[],
+    findings:any[],
+    riskPrediction:any[],
     urgency:urgencyColortype
   } = {
     diagnosis: [
