@@ -15,7 +15,7 @@ const initialMessages: Message[] = [
     {
         id: 1,
         sender: "bot",
-        content: "¡Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte hoy?",
+        content: "¡Hola! Soy tu BotMedico personal. ¿En qué puedo ayudarte hoy?",
     },
 ];
 
@@ -45,7 +45,7 @@ const Chats: React.FC = () => {
             const botMessage: Message = {
                 id: Date.now() + 1,
                 sender: "bot",
-                content: `Has dicho: "${userMessage.content}"`,
+                content: `El paciente ha dicho: "${userMessage?.content}"`,
             };
             setMessages((prev) => [...prev, botMessage]);
             setLoading(false);
@@ -67,17 +67,17 @@ const Chats: React.FC = () => {
                 <ScrollArea className="h-full px-4 py-6">
                     {messages.map((msg) => (
                         <div
-                            key={msg.id}
-                            className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"} mb-4`}
+                            key={msg?.id}
+                            className={`flex ${msg?.sender === "user" ? "justify-end" : "justify-start"} mb-4`}
                         >
                             <div
                                 className={`max-w-[70%] px-4 py-3 rounded-2xl text-base whitespace-pre-wrap shadow-sm
-                                    ${msg.sender === "user"
+                                    ${msg?.sender === "user"
                                         ? "bg-primary text-primary-foreground"
                                         : "bg-muted text-muted-foreground"
                                     }`}
                             >
-                                {msg.content}
+                                {msg?.content}
                             </div>
                         </div>
                     ))}
