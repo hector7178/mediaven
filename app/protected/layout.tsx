@@ -24,25 +24,25 @@ export default function ProtectedLayout({
 ]
   return (
     <main className="min-h-screen flex flex-col items-center">
-      <div className="flex-1 flex flex-col gap-20 max-w-5xl p-5 relative ">
+      <div className=" flex flex-col p-20">
         <Drawer   direction="left">
-  <DrawerTrigger className="absolute top-10 left-10"><MenuIcon className="w-6 h=6"/></DrawerTrigger>
-  <DrawerContent>
-    <DrawerHeader>
-      <DrawerTitle>
-        Navegacion
-      </DrawerTitle>
-      <DrawerDescription></DrawerDescription>
-    </DrawerHeader>
-    <DrawerDescription className="p-6">
-      {items?.map((d,i:number)=>{
-        return (<Link href={d?.url} key={i} className="flex flex-row gap-2 font-bold">{d?.title}</Link>)
-      })}
-    </DrawerDescription>
-    <DrawerFooter>
-    </DrawerFooter>
-  </DrawerContent>
-</Drawer>
+          <DrawerTrigger className="absolute top-24 left-24"><MenuIcon className="w-6 h=6"/></DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>
+                Navegación
+              </DrawerTitle>
+              <DrawerDescription></DrawerDescription>
+            </DrawerHeader>
+            <DrawerDescription className="p-6 flex flex-col gap-4">
+              {items?.map((d,i:number)=>{
+                return (<Link href={d?.url} key={i} className="flex flex-row gap-2 font-bold">{d?.title}</Link>)
+              })}
+            </DrawerDescription>
+            <DrawerFooter>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
           {children}
         </div>
     </main>

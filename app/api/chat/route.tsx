@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const SUPABASE_URL = process.env.SUPABASE_URL!??"https://ycaheghfuknswbavqgfx.supabase.co";
-const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY!??"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InljYWhlZ2hmdWtuc3diYXZxZ2Z4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM3OTM3MTMsImV4cCI6MjA2OTM2OTcxM30.G_Q3_SmFwClsJMiREVJjj6brysF62W8Ecm5CtpewLwQ";
+const SUPABASE_URL = process.env.SUPABASE_URL!??"https://vzjqkfnwsdgucfoensej.supabase.co";
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY!??"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ6anFrZm53c2RndWNmb2Vuc2VqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM4MzU2NjcsImV4cCI6MjA2OTQxMTY2N30.HHf9cQWBLnrtgKuqcnAghEMXSPuf_aOnzwnub6LHWmA";
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY!??"AIzaSyBw9Er1MYgz2TAYYaVk6dRqWuF7WCMFy9M";
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
             headers: { 'Content-Type': 'application/json' ,"X-goog-api-key": GEMINI_API_KEY},
             body: JSON.stringify({
                 systemInstruction: {
-                    parts: [{ text: "Actúa como un experto medico, doctor. responde cxon un posible diagnostico , las causas las consecuencias y su posible tratamiento. incluido con el poncentaje de seguridad en el diagnostico" }]  // ← Tu instrucción del sistema
+                    parts: [{ text: "Actúa como un experto medico, doctor. responde con un posible diagnostico, las causas, las consecuencias y su posible tratamiento. incluido con el poncentaje de seguridad en el diagnostico, tranta que la respuestas sean breve" }]  // ← Tu instrucción del sistema
                 },
                 contents: [{ parts: [{ text: message }] }]
             })
@@ -47,14 +47,13 @@ export async function POST(req: NextRequest) {
         // Save AI response to Supabase
         const { data: aiMsg, error: aiMsgError } = await supabase
             .from('message')
-            .insert([{ user_id, content: aiMessage, role: 'assistant' }])
+            .insert([{ user_id, content: aiMessage?.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>'), role: 'assistant' }])
             .select()
             .single();
 
         if (aiMsgError) {
             return NextResponse.json({ error: 'Error saving AI message' }, { status: 500 });
         }
-
         return NextResponse.json({ user: userMsg, ai: aiMsg },{status:200});
     } catch (error) {
         return NextResponse.json({ error: 'Internal server error'+ error }, { status: 500 });

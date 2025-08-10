@@ -92,7 +92,8 @@ const Chats = ({user}:{user:string|undefined}) => {
                                         : "bg-muted text-muted-foreground"
                                     }`}
                             >
-                                {msg?.content}
+                                 <p dangerouslySetInnerHTML={{ __html:msg?.content }} />
+                              
                             </div>
                         </div>
                     )})}
